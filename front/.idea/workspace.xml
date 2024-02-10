@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5b0b2f5f-b7ee-40f7-a872-cd378e425cea" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/../my-games-frontend/src/components/PregameComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/subviews/OddEvenView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/front.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/components/ChatRoomComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/subviews/ChatRoomView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/components/GobangComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/subviews/GobangView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/components/OddOrEvenComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/views/GameView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/GameView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/views/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/HomeView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-games-frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../my-games-frontend/src/views/LoginView.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../my-games-frontend" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2ATvpIuMNaoBnUV829Lp0GrE8Eu" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../my-games-frontend/src/views/subviews" />
+      <recent name="$PROJECT_DIR$/../my-games-frontend/src/views" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="5b0b2f5f-b7ee-40f7-a872-cd378e425cea" name="变更" comment="" />
+      <created>1655046573477</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655046573477</updated>
+      <workItem from="1655046578185" duration="43957000" />
+      <workItem from="1655186436885" duration="23122000" />
+      <workItem from="1655225214452" duration="9322000" />
+      <workItem from="1655295148228" duration="22000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
