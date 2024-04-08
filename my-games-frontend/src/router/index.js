@@ -7,6 +7,7 @@ import OddEvenView from '../views/subviews/OddEvenView.vue'
 import ErrorView from '../views/ErrorView.vue'
 import ChatRoomView from "../views/subviews/ChatRoomView.vue";
 import GobangView from "../views/subviews/GobangView.vue";
+import P414View from "@/views/P414View.vue";
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,11 @@ const routes = [
         path: 'chat_room',
         name: 'chat_room',
         component: ChatRoomView
+      },
+      {
+        path: 'p414',
+        name: 'p414',
+        component: P414View
       }
     ]
   },

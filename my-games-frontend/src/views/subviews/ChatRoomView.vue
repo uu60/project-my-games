@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     createWebSocket() {
-      let wsUri = "ws://" + this.$store.state.backURL.split("http://")[1] + "/game/chat_room/chatting?login-token="
+      let wsUri = "ws://" + this.$store.state.backURL.split("http://")[1] + "/ws/game/chat_room/chatting?login-token="
         + localStorage.token;
       try {
         this.wsObj = new WebSocket(wsUri);

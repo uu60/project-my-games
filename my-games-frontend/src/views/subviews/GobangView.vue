@@ -138,7 +138,7 @@ export default {
       this.$refs.pregame.waitDuoPlayer();
     },
     createWebSocket() {
-      let wsUri = "ws://" + this.$store.state.backURL.split("http://")[1] + "/game/" + this.gameUrl + "/gaming?login-token="
+      let wsUri = "ws://" + this.$store.state.backURL.split("http://")[1] + "/ws/game/" + this.gameUrl + "/gaming?login-token="
         + localStorage.token;
       try {
         this.wsObj = new WebSocket(wsUri);

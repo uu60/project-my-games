@@ -112,12 +112,7 @@ export default {
     }
   },
   computed: {
-    hashedPwd() {
-      return md5(this.form.password);
-    },
-    hashedPwd1() {
-      return md5(this.form1.password);
-    },
+
   },
   methods: {
     doLogin() {
@@ -131,17 +126,16 @@ export default {
             });
             return;
           }
-          this.$axios({
-            type: "get",
-            url: this.$store.state.backURL + "/login/do_login",
-            params: {username: this.form.username, password: this.hashedPwd},
-          })
+          this.$axios.post(
+            this.$store.state.backURL + "/api/v1/login",
+            {username: this.form.username, password: this.form.password},
+          )
             .then((res) => {
+              // 修改为判断头部是否带有token
               console.log(res);
-              // code == 200说明登录验证成功
-              if (res.data.code === 200) {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("username", res.data.username);
+              if (res.headers['authorization'] !== undefined) {
+                localStorage.setItem("token", res.headers['authorization']);
+                localStorage.setItem("username", this.form.username);
                 this.$router.push("/home");
               } else if (res.data.code === 410) {
                 this.$message.error("用户不存在。");
@@ -163,9 +157,9 @@ export default {
       this.$refs["form1"].validate((valid) => {
         if (valid) {
           this.$axios
-            .post(this.$store.state.backURL + "/register/do_register", {
+            .post(this.$store.state.backURL + "/api/v1/register", {
               username: this.form1.username,
-              password: this.hashedPwd1,
+              password: this.form1.password,
               code: this.form1.code
             })
             .then((res) => {

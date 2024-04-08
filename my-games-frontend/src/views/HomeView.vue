@@ -58,14 +58,17 @@ export default {
         {
           name: "猜单双",
           to: "/game/odd_even",
-          description: "2人游戏。一个人来猜对手出的弹珠为单还是双，并决定这一回合的赌注，" +
-            "赢了的一方会得到另一方猜测者押注的弹珠数量，每一个回合两人的身份会切换。" +
-            "如果回合结束后其中一个人的弹珠为负数，则游戏结束。这是来自鱿鱼游戏的猜弹珠游戏。",
+          description: "2人游戏。鱿鱼游戏里的猜单双规则",
         },
         {
           name: "五子棋",
           to: "/game/gobang",
           description: "2人游戏。这还用解释？"
+        },
+        {
+          name: "414",
+          to: "/game/p414",
+          description: "4人游戏。414玩法"
         },
         {
           name: "记忆翻牌（计划中...）",
@@ -82,7 +85,7 @@ export default {
         {
           name: "聊天室",
           to: "/game/chat_room",
-          description: "这不是个游戏，但是是游戏使用技术的实验程序。"
+          description: "这不是游戏。"
         }],
       isLogined: false
     }
