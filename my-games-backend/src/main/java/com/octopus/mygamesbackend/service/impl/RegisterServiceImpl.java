@@ -10,7 +10,8 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 
-@Service
+@Deprecated
+//@Service
 public class RegisterServiceImpl implements RegisterService {
 
     @Autowired

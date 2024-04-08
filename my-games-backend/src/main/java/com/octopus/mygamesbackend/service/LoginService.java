@@ -3,6 +3,7 @@ package com.octopus.mygamesbackend.service;
 
 import com.octopus.mygamesbackend.pojo.dao.LoginToken;
 
+@Deprecated
 public interface LoginService {
     Boolean validatePassword(String username, String password);
 

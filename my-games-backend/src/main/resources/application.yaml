@@ -14,7 +14,7 @@ spring:
       enabled: true
       max-file-size: 1GB
       max-request-size: 1GB
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:mappers/*Mapper.xml
 server:
   port: 6660

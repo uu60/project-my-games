@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service
+@Deprecated
+//@Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
