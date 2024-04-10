@@ -161,7 +161,7 @@ export default {
 
 #left_time {
   margin-left: 20px;
-  color: gray;
+  color: rgb(128, 128, 128);
 }
 
 #pregame_container {

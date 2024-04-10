@@ -70,18 +70,18 @@ export default {
           to: "/game/p414",
           description: "4人游戏。414玩法"
         },
-        {
-          name: "记忆翻牌（计划中...）",
-          // to: "/game/memory_card",
-          to: "",
-          description: "2人游戏。"
-        },
-        {
-          name: "辽阳麻将（无限期推迟）",
-          // to: "/game/ly_mahjong",
-          to: "",
-          description: "4人游戏。"
-        },
+        // {
+        //   name: "记忆翻牌（计划中...）",
+        //   // to: "/game/memory_card",
+        //   to: "",
+        //   description: "2人游戏。"
+        // },
+        // {
+        //   name: "辽阳麻将（无限期推迟）",
+        //   // to: "/game/ly_mahjong",
+        //   to: "",
+        //   description: "4人游戏。"
+        // },
         {
           name: "聊天室",
           to: "/game/chat_room",
