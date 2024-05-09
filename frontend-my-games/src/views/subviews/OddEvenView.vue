@@ -67,8 +67,8 @@
         </p>
         <p v-else>
           对手出了{{ gameData.prevOpponentUsedChip }}，你猜了{{
-            gameData.oddOrEvenStr
-          }}，押注了{{ Math.ceil(gameData.deltaChip) }}
+            oddOrEvenStr
+          }}，押注了{{ Math.abs(gameData.deltaChip) }}
         </p>
         <h2 v-cloak>弹珠<span v-if="gameData.deltaChip > 0">+</span><span>{{ gameData.deltaChip }}</span></h2>
         <el-button type="success" @click="nextRound">继续</el-button>
@@ -206,7 +206,7 @@ export default {
             break;
           case 3:
             // 接收对手名字
-            this.gameData.opponent = item.data.opponent;
+            this.gameData.opponent = item.opponent;
             break;
         }
 

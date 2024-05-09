@@ -1,10 +1,10 @@
 package com.octopus.mygamesbackend.business;
 
-import com.octopus.mygamesbackend.business.pojo.game.GobangGame;
-import com.octopus.mygamesbackend.business.pojo.game.OddEvenGame;
+import com.octopus.mygamesbackend.business.game.GobangGame;
+import com.octopus.mygamesbackend.business.game.OddEvenGame;
 import com.octopus.mygamesbackend.utils.http.Resp;
-import com.octopus.mygamesbackend.business.manager.DuoRoomManager;
-import com.octopus.mygamesbackend.business.manager.GameManager;
+import com.octopus.mygamesbackend.business.holder.DuoRoomHolder;
+import com.octopus.mygamesbackend.business.holder.GameHolder;
 import com.octopus.mygamesbackend.utils.properties.MyConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,55 +21,55 @@ public class RoomService {
 
     public void waitPlayer(String game, String room, String username, DeferredResult<Resp> result, long timeOut) {
         pool.execute(() -> {
-            DuoRoomManager duoRoomManager = DuoRoomManager.manager(game, room);
-            duoRoomManager.lock();
+            DuoRoomHolder duoRoomHolder = DuoRoomHolder.get(game, room);
+            duoRoomHolder.lock();
             try {
                 // 房间现在可加入
-                duoRoomManager.open();
-                duoRoomManager.setWaitingThread(Thread.currentThread());
-                boolean overTimeOrInterrupted = !duoRoomManager.await(timeOut * 1000 * 1000);
-                duoRoomManager.setWaitingThread(null);
+                duoRoomHolder.open();
+                duoRoomHolder.setWaitingThread(Thread.currentThread());
+                boolean overTimeOrInterrupted = !duoRoomHolder.await(timeOut * 1000 * 1000);
+                duoRoomHolder.setWaitingThread(null);
                 // 超时或被打断
                 if (overTimeOrInterrupted) {
-                    duoRoomManager.remove();
+                    duoRoomHolder.remove();
                     result.setResult(Resp.error(MyConstants.HTTP_USER_EXIT));
                     return;
                 }
                 // 人数够了被唤醒
-                List<String> players = duoRoomManager.getPlayerList();
-                GameManager gameManager = GameManager.manager(game, room);
+                List<String> players = duoRoomHolder.getPlayerList();
+                GameHolder gameHolder = GameHolder.get(game, room);
                 switch (game) {
                     case OddEvenGame.GAME_NAME:
-                        gameManager.createGame(new OddEvenGame(players));
+                        gameHolder.createGame(new OddEvenGame(players));
                         break;
                     case GobangGame.GAME_NAME:
-                        gameManager.createGame(new GobangGame(players));
+                        gameHolder.createGame(new GobangGame(players));
                         break;
                 }
-                duoRoomManager.remove();
-                duoRoomManager.signalAll();
+                duoRoomHolder.remove();
+                duoRoomHolder.signalAll();
                 result.setResult(Resp.ok());
             } finally {
-                duoRoomManager.unlock();
+                duoRoomHolder.unlock();
             }
         });
     }
 
     public List<String> getPlayersByRoom(String game, String room, String username) {
-        DuoRoomManager duoRoomManager = DuoRoomManager.manager(game, room);
-        GameManager gameManager = GameManager.manager(game, room);
-        if (gameManager.getGame() == null) {
-            duoRoomManager.lock();
+        DuoRoomHolder duoRoomHolder = DuoRoomHolder.get(game, room);
+        GameHolder gameHolder = GameHolder.get(game, room);
+        if (gameHolder.getGame() == null) {
+            duoRoomHolder.lock();
             try {
-                while (gameManager.getGame() == null) {
-                    duoRoomManager.await(0);
+                while (gameHolder.getGame() == null) {
+                    duoRoomHolder.await(0);
                 }
-                return new ArrayList<>(gameManager.getGame().getPlayerDataMap().keySet());
+                return new ArrayList<>(gameHolder.getGame().getPlayerDataMap().keySet());
             } finally {
-                duoRoomManager.unlock();
+                duoRoomHolder.unlock();
             }
         } else {
-            return new ArrayList<>(gameManager.getGame().getPlayerDataMap().keySet());
+            return new ArrayList<>(gameHolder.getGame().getPlayerDataMap().keySet());
         }
     }
 

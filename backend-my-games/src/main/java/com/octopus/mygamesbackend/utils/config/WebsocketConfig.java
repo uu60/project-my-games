@@ -1,8 +1,8 @@
 package com.octopus.mygamesbackend.utils.config;
 
-import com.octopus.mygamesbackend.business.pojo.game.GobangGame;
-import com.octopus.mygamesbackend.business.pojo.game.OddEvenGame;
-import com.octopus.mygamesbackend.business.manager.GameManager;
+import com.octopus.mygamesbackend.business.game.GobangGame;
+import com.octopus.mygamesbackend.business.game.OddEvenGame;
+import com.octopus.mygamesbackend.business.holder.GameHolder;
 import com.octopus.mygamesbackend.utils.properties.MyConstants;
 import com.octopus.mygamesbackend.utils.websocket.WebSocketSessionPoolUtils;
 import com.octopus.mygamesbackend.handler.websocket.ChatRoomWebsocketHandler;
@@ -66,17 +66,17 @@ public class WebsocketConfig implements WebSocketConfigurer {
             if (OddEvenWebSocketHandler.HANDLE_URI.equals(req.getRequestURI())
                     || GobangWebSocketHandler.HANDLE_URI.equals(req.getRequestURI())) {
                 String room = (String) session.getAttribute(MyConstants.SESSION_ROOM_KEY);
-                GameManager manager = null;
+                GameHolder holder = null;
                 switch (req.getRequestURI()) {
                     case OddEvenWebSocketHandler.HANDLE_URI:
-                        manager = GameManager.manager(OddEvenGame.GAME_NAME, room);
+                        holder = GameHolder.get(OddEvenGame.GAME_NAME, room);
                         break;
                     case GobangWebSocketHandler.HANDLE_URI:
-                        manager = GameManager.manager(GobangGame.GAME_NAME, room);
+                        holder = GameHolder.get(GobangGame.GAME_NAME, room);
                         break;
                 }
-                assert manager != null;
-                if (!manager.existsGame()) {
+                assert holder != null;
+                if (!holder.existsGame()) {
                     return false;
                 }
                 attributes.put(MyConstants.SESSION_ROOM_KEY, session.getAttribute(MyConstants.SESSION_ROOM_KEY));

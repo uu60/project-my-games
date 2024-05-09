@@ -1,4 +1,4 @@
-package com.octopus.mygamesbackend.business.pojo.game;
+package com.octopus.mygamesbackend.business.game;
 
 import java.util.HashMap;
 import java.util.List;

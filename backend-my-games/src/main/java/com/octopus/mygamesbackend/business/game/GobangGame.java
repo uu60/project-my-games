@@ -1,4 +1,4 @@
-package com.octopus.mygamesbackend.business.pojo.game;
+package com.octopus.mygamesbackend.business.game;
 
 import com.octopus.mygamesbackend.utils.websocket.WebSocketSessionPoolUtils;
 import com.octopus.mygamesbackend.utils.websocket.Resp;

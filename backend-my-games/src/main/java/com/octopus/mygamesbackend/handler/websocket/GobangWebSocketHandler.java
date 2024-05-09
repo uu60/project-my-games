@@ -1,10 +1,10 @@
 package com.octopus.mygamesbackend.handler.websocket;
 
-import com.octopus.mygamesbackend.business.pojo.game.Game;
-import com.octopus.mygamesbackend.business.pojo.game.GobangGame;
-import com.octopus.mygamesbackend.business.pojo.game.PlayerData;
+import com.octopus.mygamesbackend.business.game.Game;
+import com.octopus.mygamesbackend.business.game.GobangGame;
+import com.octopus.mygamesbackend.business.game.PlayerData;
 import com.octopus.mygamesbackend.business.RoomService;
-import com.octopus.mygamesbackend.business.manager.GameManager;
+import com.octopus.mygamesbackend.business.holder.GameHolder;
 import com.octopus.mygamesbackend.utils.properties.MyConstants;
 import com.octopus.mygamesbackend.utils.websocket.WebSocketSessionPoolUtils;
 import com.octopus.mygamesbackend.utils.websocket.Resp;
@@ -29,9 +29,9 @@ public class GobangWebSocketHandler implements WebSocketHandler {
         String username = (String) session.getAttributes().get(MyConstants.SESSION_USERNAME_KEY);
         String room = (String) session.getAttributes().get(MyConstants.SESSION_ROOM_KEY);
         WebSocketSessionPoolUtils.pool.put(username, session);
-        GameManager gameManager = GameManager.manager(GobangGame.GAME_NAME, room);
+        GameHolder gameHolder = GameHolder.get(GobangGame.GAME_NAME, room);
         // 告诉玩家身份和对手的名字
-        Game game = gameManager.getGame();
+        Game game = gameHolder.getGame();
         Map<String, PlayerData> playerDataMap = game.getPlayerDataMap();
         WebSocketSessionPoolUtils.sendMessage(username, Resp.ok(3).put("opponent",
                 service.getOpponentsByRoom(GobangGame.GAME_NAME, room, username).get(0))
@@ -46,8 +46,8 @@ public class GobangWebSocketHandler implements WebSocketHandler {
         String newPiece = message.getPayload().toString();
         int x = Integer.parseInt(newPiece.split(",")[0]);
         int y = Integer.parseInt(newPiece.split(",")[1]);
-        GameManager gameManager = GameManager.manager(GobangGame.GAME_NAME, room);
-        ((GobangGame) gameManager.getGame()).handle(x, y, username);
+        GameHolder gameHolder = GameHolder.get(GobangGame.GAME_NAME, room);
+        ((GobangGame) gameHolder.getGame()).handle(x, y, username);
     }
 
     @Override
@@ -59,13 +59,13 @@ public class GobangWebSocketHandler implements WebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         String username = (String) session.getAttributes().get(MyConstants.SESSION_USERNAME_KEY);
         String room = (String) session.getAttributes().get(MyConstants.SESSION_ROOM_KEY);
-        GameManager gameManager = GameManager.manager(GobangGame.GAME_NAME, room);
+        GameHolder gameHolder = GameHolder.get(GobangGame.GAME_NAME, room);
         // 通知另一个玩家对方已经离开
-        if (gameManager.getGame() != null) {
+        if (gameHolder.getGame() != null) {
             String opponent = service.getOpponentsByRoom(GobangGame.GAME_NAME, room, username).get(0);
             WebSocketSessionPoolUtils.sendMessage(opponent, Resp.ok(2));
         }
-        gameManager.remove();
+        gameHolder.remove();
     }
 
     @Override

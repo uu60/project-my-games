@@ -1,7 +1,7 @@
-package com.octopus.mygamesbackend.business.manager;
+package com.octopus.mygamesbackend.business.holder;
 
-import com.octopus.mygamesbackend.business.pojo.game.Game;
-import com.octopus.mygamesbackend.business.pojo.game.Room;
+import com.octopus.mygamesbackend.business.game.Game;
+import com.octopus.mygamesbackend.business.game.Room;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -13,16 +13,16 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
-public class DuoRoomManager {
+public class DuoRoomHolder {
     // 游戏 : (房间 : 玩家集合)
     private static final Map<String, Map<String, Room>> rooms = new ConcurrentHashMap<>();
-    private static final Map<String, Map<String, DuoRoomManager>> managers = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, DuoRoomHolder>> holders = new ConcurrentHashMap<>();
 
     static {
         // 初始化房间容器
         for (String game : Game.allGames) {
             rooms.put(game, new ConcurrentHashMap<>());
-            managers.put(game, new ConcurrentHashMap<>());
+            holders.put(game, new ConcurrentHashMap<>());
         }
     }
 
@@ -35,7 +35,7 @@ public class DuoRoomManager {
     // 等待条件
     private final Condition condition = lock.newCondition();
 
-    private DuoRoomManager(String game, String room) {
+    private DuoRoomHolder(String game, String room) {
         this.game = game;
         this.room = room;
     }
@@ -48,23 +48,23 @@ public class DuoRoomManager {
         return this.waitingThread;
     }
 
-    public static DuoRoomManager manager(String game, String room) {
-        if (getManagersByGame(game).get(room) == null) {
-            synchronized (managers) {
-                if (getManagersByGame(game).get(room) == null) {
-                    getManagersByGame(game).put(room, new DuoRoomManager(game, room));
+    public static DuoRoomHolder get(String game, String room) {
+        if (getHoldersByGame(game).get(room) == null) {
+            synchronized (holders) {
+                if (getHoldersByGame(game).get(room) == null) {
+                    getHoldersByGame(game).put(room, new DuoRoomHolder(game, room));
                 }
             }
         }
-        return getManagersByGame(game).get(room);
+        return getHoldersByGame(game).get(room);
     }
 
-    private static Map<String, DuoRoomManager> getManagersByGame(String game) {
-        return managers.get(game);
+    private static Map<String, DuoRoomHolder> getHoldersByGame(String game) {
+        return holders.get(game);
     }
 
     public boolean existsRoom() {
-        return getRoomsByGame(game).containsKey(room) || GameManager.manager(game, room).existsGame();
+        return getRoomsByGame(game).containsKey(room) || GameHolder.get(game, room).existsGame();
     }
 
     public void createRoom(String player) {
@@ -135,7 +135,7 @@ public class DuoRoomManager {
 
     public void remove() {
         getRoomsByGame(game).remove(room);
-        getManagersByGame(game).remove(room);
+        getHoldersByGame(game).remove(room);
     }
 
     private Map<String, Room> getRoomsByGame(String game) {
