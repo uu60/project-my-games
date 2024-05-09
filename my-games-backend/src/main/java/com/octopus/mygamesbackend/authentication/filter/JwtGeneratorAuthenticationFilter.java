@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.octopus.mygamesbackend.authentication.utils.Constants;
 import com.octopus.mygamesbackend.authentication.vo.UsernamePasswordVO;
-import com.octopus.mygamesbackend.utils.http.R;
-import com.octopus.mygamesbackend.utils.properties.OProperties;
+import com.octopus.mygamesbackend.utils.http.Resp;
+import com.octopus.mygamesbackend.utils.properties.MyConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -66,7 +66,7 @@ public class JwtGeneratorAuthenticationFilter extends UsernamePasswordAuthentica
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException failed) throws IOException, ServletException {
-        response.getOutputStream().write(gson.toJson(R.error(OProperties.HTTP_WRONG_PWD, "Wrong " +
+        response.getOutputStream().write(gson.toJson(Resp.error(MyConstants.HTTP_WRONG_PWD, "Wrong " +
                 "username or password.")).getBytes(StandardCharsets.UTF_8));
     }
 }

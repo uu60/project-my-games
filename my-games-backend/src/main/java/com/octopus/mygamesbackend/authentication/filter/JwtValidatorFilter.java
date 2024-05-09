@@ -1,8 +1,8 @@
 package com.octopus.mygamesbackend.authentication.filter;
 
 import com.google.gson.Gson;
-import com.octopus.mygamesbackend.utils.http.R;
-import com.octopus.mygamesbackend.utils.properties.OProperties;
+import com.octopus.mygamesbackend.utils.http.Resp;
+import com.octopus.mygamesbackend.utils.properties.MyConstants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
@@ -45,10 +45,10 @@ public class JwtValidatorFilter extends OncePerRequestFilter {
                 Jws<Claims> claims = jwtParser.parseClaimsJws(token);
                 String username = claims.getBody().getSubject();
                 Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority("ROLE_TEST"), new SimpleGrantedAuthority("TEST"))));
-                request.getSession().setAttribute(OProperties.SESSION_USERNAME_KEY, username);
+                request.getSession().setAttribute(MyConstants.SESSION_USERNAME_KEY, username);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (JwtException e) {
-                String json = gson.toJson(R.error(OProperties.HTTP_ILLEGAL_ACCESS, "Invalid token."));
+                String json = gson.toJson(Resp.error(MyConstants.HTTP_ILLEGAL_ACCESS, "Invalid token."));
                 response.setContentType("application/json");
                 response.getWriter().write(json);
                 return;

@@ -24,9 +24,16 @@
           <!--    对家    -->
           <el-row class="username">MRL</el-row>
           <el-row>
-            <el-button style="padding: 5px; font-size: 30px" round disabled>10</el-button>
+            <el-button  style="padding: 5px; font-size: 30px" round disabled>10</el-button>
           </el-row>
           <el-row>
+            <el-button class="card" style="margin: 0; color: black" disabled>
+              <span>A</span>
+              <br>
+              <span style="font-size: 20px">♦</span>
+            </el-button>
+          </el-row>
+          <el-row style="margin-top: 200px">
             <el-button class="card" style="margin: 0; color: black" disabled>
               <span>A</span>
               <br>
@@ -41,7 +48,7 @@
             <el-button class="card" style="margin: 0; color: black" disabled>
               <span>A</span>
               <br>
-              <span style="font-size: 20px">♠️</span>
+              <span style="font-size: 20px">♦</span>
             </el-button>
           </el-row>
           <el-col style="display: block">
@@ -55,16 +62,24 @@
 
       <!--   操作区   -->
       <el-row style="height: 5%; padding: 0">
+        <el-button type="warning">单挑</el-button>
+        <el-button type="primary">钩岔</el-button>
         <el-button type="info">跳过</el-button>
         <el-button type="success">出牌</el-button>
       </el-row>
 
       <!--  手牌区    -->
       <el-row style="height: 20%; margin-left: -60px" class="content_center">
-        <el-button class="card" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']" :key="i">
-          <span>{{ i }}</span>
+        <el-button
+            :id="'holding' + idx"
+            class="card"
+            v-for="(item, idx) in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']"
+            :key="idx"
+            :style="'z-index: ' + idx"
+            @click="toggleMoveUpCard(idx)">
+          <span>{{ item }}</span>
           <br>
-          <span style="font-size: 20px">♠️</span>
+          <span style="font-size: 20px">♠</span>
         </el-button>
       </el-row>
     </div>
@@ -81,6 +96,28 @@ export default {
         opponents: [],
         holding: [],
         turn: 0,
+        chosen: [],
+        // 上家上一次出的
+        last: [],
+        // 对家上一次出的
+        opposite: [],
+        // 下家上一次出的
+        next: []
+      }
+    }
+  },
+  methods: {
+    toggleMoveUpCard(idx) {
+      if (this.chosen == null) {
+        this.chosen = [];
+      }
+      let clickedCard = document.getElementById("holding" + idx);
+      if (this.chosen.includes(idx)) {
+        this.chosen = this.chosen.filter(item => item !== idx);
+        clickedCard.classList.remove("move-up");
+      } else {
+        this.chosen.push(idx);
+        clickedCard.classList.add("move-up");
       }
     }
   },
@@ -117,7 +154,7 @@ export default {
 .card {
   width: 105px;
   height: 140px;
-  margin: 0 -60px 0 0;
+  margin: 0 -70px 0 0;
   text-align: left;
   justify-content: flex-start;
   align-items: flex-start;
@@ -129,6 +166,11 @@ export default {
 
 .username {
   font-size: 30px;
+}
+
+.move-up {
+  transform: translateY(-20px); /* 将元素向上移动 20 像素 */
+  /* 可选：添加其他样式 */
 }
 
 </style>
